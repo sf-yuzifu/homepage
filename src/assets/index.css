@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f6f7f8;
+}
+
+a {
+  text-decoration: unset;
+  color: unset;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 400px) {
+  .arco-page-header-wrapper .arco-page-header-header {
+    justify-content: center;
+  }
+}
+
+.arco-page-header-main .arco-page-header-title {
+  white-space: normal;
+  text-align: center;
+}
