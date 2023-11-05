@@ -9,6 +9,7 @@ document.addEventListener('mousemove', showMousePosition, false)
 function showMousePosition(event) {
   posX.value = event.clientX
   posY.value = event.clientY
+  document.querySelector('#cursor .inner').style.opacity = 1
 }
 
 document.body.onmouseleave = function () {
@@ -26,7 +27,11 @@ document.oncontextmenu = function () {
 let el = window.document.body
 window.document.body.onmouseover = function (event) {
   el = event.target
-  if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+  if (
+    el.tagName === 'A' ||
+    el.tagName === 'BUTTON' ||
+    el.classList.contains('css-cursor-hover-enabled')
+  ) {
     document.querySelector('#cursor').classList.add('hover')
   } else {
     document.querySelector('#cursor').classList.remove('hover')

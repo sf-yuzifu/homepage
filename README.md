@@ -1,2 +1,2 @@
-# blueArchive-CuteChibi
-A project to select the Chibi in Blue Archive.
+# Homepage
+A homepage project whose style is Blue Archive.

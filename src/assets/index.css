@@ -1,10 +1,25 @@
+@font-face {
+  font-family: Blueaka;
+  font-weight: 400;
+  src: url(/font/Blueaka.woff2) format('woff2');
+}
+@font-face {
+  font-family: Blueaka;
+  font-weight: 700;
+  src: url(/font/Blueaka_Bold.woff2) format('woff2');
+}
+
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: #f6f7f8;
+  background-color: #fff;
+  background-image: url("/aris.jpeg");
+  background-position: center;
+  background-size: cover;
+  font-family: Blueaka, Inter, "-apple-system", BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "noto sans", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 a {

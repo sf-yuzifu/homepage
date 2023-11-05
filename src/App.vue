@@ -1,18 +1,15 @@
 <script setup>
 import Cursor from '@/components/Cursor.vue'
+import Footer from '@/components/Footer.vue'
+import Level from '@/components/Level.vue'
+import Toolbox from '@/components/Toolbox.vue'
 </script>
 
 <template>
+  <Level></Level>
+  <Toolbox></Toolbox>
+  <Footer></Footer>
   <Cursor></Cursor>
 </template>
 
-<style scoped>
-.container {
-  width: 100%;
-  margin: auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-</style>
+<style scoped></style>
