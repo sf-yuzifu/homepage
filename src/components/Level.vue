@@ -1,21 +1,40 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const exp = ref(1145)
+const nextExp = ref(1145)
+</script>
 
 <template>
   <div class="level-box">
     <div class="container">
       <div class="level">
         <span>Lv.</span>
-        <p>70</p>
+        <p>87</p>
       </div>
-      <span class="name">小鱼yuzifu</span>
+      <div class="right">
+        <span class="name">小鱼yuzifu</span>
+        <div>
+          <a-progress
+            :percent="exp / nextExp"
+            :show-text="false"
+            :color="exp === nextExp ? '#ffe433' : '#89d5fd'"
+            trackColor="#535E67"
+          >
+          </a-progress>
+          <p :style="{ color: exp === nextExp ? '#ffe433' : '#66E0FE' }">
+            {{ exp === nextExp ? 'MAX' : exp + '/' + nextExp }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .level-box {
-  width: 260px;
-  height: 100px;
+  width: 300px;
+  height: 96px;
   background: linear-gradient(120deg, #003153, #2265bb 15%, #003153 70%, #003153);
   position: relative;
   left: 0;
@@ -43,6 +62,8 @@
   justify-content: flex-start;
   align-items: center;
   margin: auto 0 auto 26px;
+  width: 100%;
+  height: calc(100% - 26px);
 }
 
 .level {
@@ -55,21 +76,34 @@
   color: #fff;
   font-size: 42px;
   font-weight: 600;
-  font-style: oblique;
+  transform: skewX(-10deg);
 }
 
 .container .name {
   color: #fff;
   font-size: 24px;
-  align-self: flex-start;
-  margin: 3px 20px;
   font-weight: 600;
 }
 
 .container .level span {
   color: #ffe433;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
-  font-style: oblique;
+  transform: skewX(-10deg);
+}
+
+.right {
+  align-self: flex-start;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.right p {
+  font-size: 20px;
+  font-weight: 600;
 }
 </style>
