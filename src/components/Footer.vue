@@ -14,7 +14,28 @@ setInterval(() => {
 
 <template>
   <div class="footer">
-    <div class="project-box"></div>
+    <div class="project-box">
+      <div class="project css-cursor-hover-enabled">
+        <icon-tiktok-color />
+        <span>抖音</span>
+      </div>
+      <div class="project css-cursor-hover-enabled">
+        <icon-lark-color />
+        <span>飞书</span>
+      </div>
+      <div class="project css-cursor-hover-enabled">
+        <icon-tiktok-color />
+        <span>抖音</span>
+      </div>
+      <div class="project css-cursor-hover-enabled">
+        <icon-lark-color />
+        <span>飞书</span>
+      </div>
+      <div class="project css-cursor-hover-enabled">
+        <icon-tiktok-color />
+        <span>抖音</span>
+      </div>
+    </div>
     <div class="time">
       <p>△×+○</p>
       <span>{{ time }}</span>
@@ -54,6 +75,8 @@ setInterval(() => {
   transform: skew(20deg);
   position: absolute;
   left: 20px;
+  display: inline-flex;
+  align-items: flex-end;
 }
 
 .time {
@@ -74,5 +97,32 @@ setInterval(() => {
 
 .time span {
   color: #525f72;
+}
+
+.project {
+  height: max-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 15px;
+  margin: 0 0 0 5%;
+  transition: transform 0.05s;
+}
+
+.project:active {
+  transform: scale(0.9);
+}
+
+.project span {
+  margin: 5px 0 0;
+  color: #003153;
+  font-size: 16px;
+}
+
+.arco-icon {
+  font-size: 48px;
 }
 </style>

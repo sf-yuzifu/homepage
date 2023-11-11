@@ -8,7 +8,7 @@ const nextExp = ref(1145)
 <template>
   <div class="level-box">
     <div class="container">
-      <div class="level">
+      <div class="level css-cursor-hover-enabled">
         <span>Lv.</span>
         <p>87</p>
       </div>
@@ -36,7 +36,7 @@ const nextExp = ref(1145)
   width: 300px;
   height: 96px;
   background: linear-gradient(120deg, #003153, #2265bb 15%, #003153 70%, #003153);
-  position: relative;
+  position: absolute;
   left: 0;
   top: 40px;
   border-radius: 0 8px 8px 0;
@@ -70,6 +70,11 @@ const nextExp = ref(1145)
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.1s;
+}
+
+.level-box:active .level {
+  transform: scale(0.85);
 }
 
 .container .level p {

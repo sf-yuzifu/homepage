@@ -30,7 +30,9 @@ window.document.body.onmouseover = function (event) {
   if (
     el.tagName === 'A' ||
     el.tagName === 'BUTTON' ||
-    el.classList.contains('css-cursor-hover-enabled')
+    el.classList.contains('css-cursor-hover-enabled') ||
+    el.parentElement.classList.contains('css-cursor-hover-enabled') ||
+    el.parentElement.parentElement.classList.contains('css-cursor-hover-enabled')
   ) {
     document.querySelector('#cursor').classList.add('hover')
   } else {
@@ -53,7 +55,7 @@ window.document.body.onmouseover = function (event) {
 
 <style>
 * {
-  cursor: none;
+  cursor: none !important;
 }
 </style>
 

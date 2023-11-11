@@ -1,11 +1,26 @@
-<script setup></script>
+<script setup>
+import { Modal } from '@arco-design/web-vue'
+import { h } from 'vue'
+
+const about = () => {
+  Modal.open({
+    title: '关于',
+    content: () => [
+      h('p', {}, '© 2023 小鱼yuzifu'),
+      h('span', {}, '项目地址：'),
+      h('a', { href: 'https://github.com/sf-yuzifu/homepage', target: '_blank' }, 'Github')
+    ],
+    footer: false
+  })
+}
+</script>
 
 <template>
   <div class="toolbox-box">
     <!--    <div class="toolbox"></div>-->
     <!--    <div class="toolbox"></div>-->
     <!--    <div class="toolbox"></div>-->
-    <a class="about toolbox">
+    <a class="about toolbox" @click="about">
       <icon-info-circle class="css-cursor-hover-enabled" />
     </a>
   </div>

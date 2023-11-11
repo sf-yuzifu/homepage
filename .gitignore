@@ -131,3 +131,5 @@ dist
 .idea
 
 yarn.lock
+
+.DS_Store
