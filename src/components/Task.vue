@@ -5,6 +5,9 @@ const curtain = ref(false)
 
 const skip = () => {
   curtain.value = true
+  setTimeout(() => {
+    window.open('https://blog.yzf.moe')
+  }, 1000)
   setTimeout(
     () => {
       curtain.value = false
@@ -67,7 +70,7 @@ const skip = () => {
 }
 
 .task:after {
-  content: '业务区';
+  content: '个人博客';
   position: absolute;
   left: 10px;
   bottom: 0;

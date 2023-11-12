@@ -15,13 +15,28 @@ setInterval(() => {
 <template>
   <div class="footer">
     <div class="project-box">
-      <a href="https://alcex.top/" class="project css-cursor-hover-enabled">
-        <icon-tiktok-color />
-        <span>抖音</span>
+      <a
+        href="https://gitee.com/sf-yuzifu/eat-fish-together"
+        class="project css-cursor-hover-enabled"
+      >
+        <img src="/img/fish.png" alt="" />
+        <span>一起吃小鱼</span>
       </a>
-      <a class="project css-cursor-hover-enabled">
-        <icon-lark-color />
-        <span>飞书</span>
+      <a href="https://gitee.com/sf-yuzifu/bcm_convertor" class="project css-cursor-hover-enabled">
+        <img src="/img/convertor.png" alt="" />
+        <span>编程猫格式工厂</span>
+      </a>
+      <a href="https://waddle.coco-central.cn/" class="project css-cursor-hover-enabled">
+        <img src="/img/waddle2.png" alt="" />
+        <span>Waddle编辑器</span>
+      </a>
+      <a href="https://shequ.pickduck.cn/" class="project css-cursor-hover-enabled">
+        <img src="/img/pickduck.png" alt="" />
+        <span>PICKDUCK</span>
+      </a>
+      <a href="https://boxy.coco-central.cn/" class="project css-cursor-hover-enabled">
+        <img src="/img/boxy.png" alt="" />
+        <span>Boxy编辑器</span>
       </a>
     </div>
     <div class="time">
@@ -112,5 +127,10 @@ setInterval(() => {
 
 .arco-icon {
   font-size: 48px;
+}
+
+.project img {
+  width: 64px;
+  height: 64px;
 }
 </style>
