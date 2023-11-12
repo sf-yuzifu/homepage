@@ -15,26 +15,14 @@ setInterval(() => {
 <template>
   <div class="footer">
     <div class="project-box">
-      <div class="project css-cursor-hover-enabled">
+      <a href="https://alcex.top/" class="project css-cursor-hover-enabled">
         <icon-tiktok-color />
         <span>抖音</span>
-      </div>
-      <div class="project css-cursor-hover-enabled">
+      </a>
+      <a class="project css-cursor-hover-enabled">
         <icon-lark-color />
         <span>飞书</span>
-      </div>
-      <div class="project css-cursor-hover-enabled">
-        <icon-tiktok-color />
-        <span>抖音</span>
-      </div>
-      <div class="project css-cursor-hover-enabled">
-        <icon-lark-color />
-        <span>飞书</span>
-      </div>
-      <div class="project css-cursor-hover-enabled">
-        <icon-tiktok-color />
-        <span>抖音</span>
-      </div>
+      </a>
     </div>
     <div class="time">
       <p>△×+○</p>
