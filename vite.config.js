@@ -25,7 +25,7 @@ export default defineConfig({
         optimizationLevel: 7
       },
       mozjpeg: {
-        quality: 20
+        quality: 50
       },
       pngquant: {
         quality: [0.8, 0.9],
@@ -69,7 +69,7 @@ export default defineConfig({
       manifest: {
         name: 'Homepage',
         short_name: 'Homepage',
-        description: "sf-yuzifu's homepage." ,
+        description: "sf-yuzifu's homepage.",
         theme_color: '#128AFA',
         start_url: '/',
         id: 'Homepage',

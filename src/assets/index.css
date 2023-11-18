@@ -18,6 +18,7 @@
 
 body {
   background-color: #fff;
+  overflow: hidden;
   font-family: Blueaka, Inter, '-apple-system', BlinkMacSystemFont, 'PingFang SC',
     'Hiragino Sans GB', 'noto sans', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif !important;
