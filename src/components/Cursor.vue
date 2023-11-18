@@ -60,6 +60,11 @@ window.document.body.onmouseover = function (event) {
 </style>
 
 <style scoped>
+@media (hover: none) {
+  #cursor {
+    display: none;
+  }
+}
 #cursor {
   pointer-events: none;
   z-index: 9999;

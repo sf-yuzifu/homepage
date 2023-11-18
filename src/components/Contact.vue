@@ -2,7 +2,7 @@
 import { Icon } from '@arco-design/web-vue'
 
 const IconFont = Icon.addFromIconFontCn({
-  src: 'https:////at.alicdn.com/t/c/font_4175685_urr0ac37uj.js'
+  src: 'https://at.alicdn.com/t/c/font_4336463_0i6ly0yvyzb.js'
 })
 </script>
 
@@ -12,18 +12,15 @@ const IconFont = Icon.addFromIconFontCn({
       href="https://wpa.qq.com/msgrd?v=3&uin=1906929246&site=qq&menu=yes&jumpflag=1"
       class="contact css-cursor-hover-enabled"
     >
-      <img
-        src="https://wiki.connect.qq.com/wp-content/uploads/2013/10/03_qq_symbol-1-250x300.png"
-        alt=""
-      />
+      <icon-font type="icon-qq" />
       <span>QQ</span>
     </a>
     <a href="https://gitee.com/sf-yuzifu" class="contact css-cursor-hover-enabled">
-      <img src="https://gitee.com/static/images/gitee-logos/logo_gitee_g_red.png" alt="" />
+      <icon-font type="icon-gitee" />
       <span>Gitee</span>
     </a>
     <a href="https://github.com/sf-yuzifu" class="contact css-cursor-hover-enabled">
-      <icon-github :style="{ color: '#fff' }" />
+      <icon-font type="icon-github" />
       <span>Github</span>
     </a>
     <a href="https://space.bilibili.com/447666445" class="contact css-cursor-hover-enabled">
@@ -75,6 +72,7 @@ const IconFont = Icon.addFromIconFontCn({
 
 .arco-icon {
   font-size: 48px;
+  filter: drop-shadow(0px 0px 4px #fff6);
 }
 
 .contact img {

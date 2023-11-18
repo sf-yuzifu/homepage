@@ -59,6 +59,7 @@ setInterval(() => {
   display: inline-flex;
   justify-content: center;
   filter: drop-shadow(0px 0px 6px #0003);
+  transition: all 0.3s;
 }
 
 .footer::after {
@@ -70,6 +71,7 @@ setInterval(() => {
   transform: skew(50deg);
   border-radius: 4px;
   z-index: -1;
+  transition: all 0.3s;
 }
 
 .project-box {
@@ -132,5 +134,62 @@ setInterval(() => {
 .project img {
   width: 64px;
   height: 64px;
+}
+
+@media screen and (max-width: 830px) {
+  .project-box {
+    width: 100%;
+    justify-content: space-evenly;
+    left: 0;
+  }
+
+  .time {
+    display: none;
+  }
+
+  .project {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .project img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .project span {
+    font-size: 12px;
+  }
+
+  .footer::after {
+    width: calc(100% - 120px);
+  }
+}
+
+@media screen and (max-width: 495px) {
+  .project span {
+    display: none;
+  }
+
+  .project {
+    bottom: 0;
+  }
+
+  .project-box {
+    transform: skew(0deg);
+    align-items: center;
+  }
+
+  .footer {
+    transform: skew(0deg);
+    width: calc(100% - 40px);
+    height: 80px;
+  }
+
+  .footer::after {
+    transform: skew(0deg);
+    display: none;
+  }
 }
 </style>

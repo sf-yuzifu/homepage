@@ -111,4 +111,40 @@ const nextExp = ref(1145)
   font-size: 20px;
   font-weight: 600;
 }
+
+@media screen and (max-width: 495px) {
+  .right {
+    display: none;
+  }
+
+  .name {
+    word-break: keep-all;
+  }
+
+  .level-box:hover {
+    width: calc(100% - 76px);
+  }
+
+  .level-box:hover .right {
+    display: flex;
+  }
+
+  .level-box {
+    width: 100px;
+    transition: all 0.3s;
+    z-index: 10;
+    left: 36px;
+    transform: skewX(-10deg);
+    border-radius: 8px;
+  }
+
+  .level-box:before {
+    display: none;
+  }
+
+  .level-box .container {
+    transform: skewX(10deg);
+    margin: auto 26px;
+  }
+}
 </style>

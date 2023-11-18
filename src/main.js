@@ -34,12 +34,18 @@ window.addEventListener('resize', init)
 init()
 
 setInterval(() => {
-  document.querySelectorAll('a[href]').forEach((link) => {
+  document.querySelectorAll('a[href]:not(.tag)').forEach((link) => {
+    link.classList.add('tag')
     link.addEventListener('click', async (e) => {
       const url = link.getAttribute('href')
       e.preventDefault()
       document.querySelector('#curtain').style.display = 'block'
-      setTimeout(() => window.open(url), 900)
+      setTimeout(() => {
+        let a = document.createElement('a')
+        a.href = url
+        a.target = '_blank'
+        a.click()
+      }, 900)
       setTimeout(() => (document.querySelector('#curtain').style.display = ''), 3000)
     })
   })

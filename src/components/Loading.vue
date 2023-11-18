@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 
+const prop = defineProps(['percent'])
+
 const imgUrl = ref('https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar2.b84283e9.png')
 const imgList = [
   'https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar1.c18ce793.png',
@@ -21,11 +23,9 @@ const options = {
   easing: 'ease-in-out'
 }
 let a = 0
-// loadingImg.value.animate(keyframes, options)
 imgUrl.value = imgList[a % 4]
 a++
 setInterval(() => {
-  // loadingImg.value.animate(keyframes, options)
   imgUrl.value = imgList[a % 4]
   a++
 }, 2000)
@@ -44,7 +44,7 @@ setInterval(() => {
     </div>
     <div class="progress_wrapper">
       <h1 class="title">connecting...</h1>
-      <!--      <div class="percent">77%</div>-->
+      <div class="percent">{{ Math.floor(prop.percent * 100) + '%' }}</div>
     </div>
   </div>
 </template>
@@ -111,7 +111,7 @@ img {
 
 .progress_wrapper .percent {
   margin-top: 0.3666666667rem;
-  font-size: 0.8666666667rem;
+  font-size: 1.4rem;
   font-family: TVPS-Vain-Capital-2, system-ui;
   color: #1289f9;
 }

@@ -9,19 +9,28 @@ import Loading from '@/components/Loading.vue'
 import { ref } from 'vue'
 
 const loading = ref(true)
+const percent = ref(1)
 
-setTimeout(
-  () => {
-    loading.value = false
-  },
-  Math.floor(Math.random() * 5 + 3) * 1000
-  // 懒了，先放个伪加载
-)
+import NProgress from 'nprogress'
+
+NProgress.start()
+
+const load = setInterval(() => {
+  percent.value = NProgress.status
+  if (document.readyState === 'complete') {
+    NProgress.done()
+    percent.value = 1
+    setTimeout(() => {
+      loading.value = false
+    }, 2000)
+    clearInterval(load)
+  }
+}, 1)
 </script>
 
 <template>
   <transition name="loading">
-    <Loading v-if="loading"></Loading>
+    <Loading v-if="loading" :percent="percent"></Loading>
   </transition>
   <main v-if="!loading">
     <Level></Level>
@@ -30,6 +39,7 @@ setTimeout(
     <Task></Task>
     <Footer></Footer>
     <div id="curtain"></div>
+    <div id="background"></div>
   </main>
   <Cursor></Cursor>
 </template>
@@ -50,5 +60,17 @@ main {
 
 .loading-leave-active {
   transition: opacity 0.5s ease-in-out;
+}
+
+#background {
+  background-image: url('/aris.jpeg');
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 </style>

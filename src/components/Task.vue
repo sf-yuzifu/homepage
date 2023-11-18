@@ -110,4 +110,10 @@ const skip = () => {
     opacity 0.1s ease-in-out,
     transform 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 495px) {
+  .task {
+    right: 40px;
+  }
+}
 </style>
