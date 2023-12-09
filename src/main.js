@@ -1,6 +1,8 @@
 import './assets/index.css'
 import '@arco-design/web-vue/dist/arco.css'
 
+import 'pixi-spine' // Do this once at the very start of your code. This registers the loader!
+
 import { createApp } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import ArcoVue from '@arco-design/web-vue'
@@ -50,3 +52,27 @@ setInterval(() => {
     })
   })
 }, 1000)
+
+import * as PIXI from 'pixi.js'
+import { Spine } from 'pixi-spine'
+
+const l2d = new PIXI.Application({
+  width: 1000 * 2.4,
+  height: 720 * 2.4,
+  backgroundAlpha: 0
+})
+document.querySelector('#background').appendChild(l2d.view)
+
+PIXI.Assets.load('CH0063_home.skel').then((resource) => {
+  const animation = new Spine(resource.spineData)
+  l2d.stage.addChild(animation)
+
+  if (animation.state.hasAnimation('Idle_01')) {
+    animation.scale.set(0.3 * 2.4)
+    animation.state.setAnimation(0, 'Idle_01', true)
+    animation.state.timeScale = 1
+    animation.autoUpdate = true
+    animation.y = (((2568 + 1600) * 0.3) / 2) * 2.4
+    animation.x = ((3462 * 0.3) / 2) * 2.4
+  }
+})

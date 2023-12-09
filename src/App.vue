@@ -32,6 +32,7 @@ const load = setInterval(() => {
   <transition name="loading">
     <Loading v-if="loading" :percent="percent"></Loading>
   </transition>
+  <div id="background"></div>
   <main v-if="!loading">
     <Level></Level>
     <Toolbox></Toolbox>
@@ -39,7 +40,6 @@ const load = setInterval(() => {
     <Task></Task>
     <Footer></Footer>
     <div id="curtain"></div>
-    <div id="background"></div>
   </main>
   <Cursor></Cursor>
 </template>
@@ -72,5 +72,9 @@ main {
   top: 0;
   left: 0;
   z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 </style>
