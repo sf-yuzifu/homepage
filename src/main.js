@@ -62,7 +62,11 @@ const l2d = new PIXI.Application({
 document.querySelector('#background').appendChild(l2d.view)
 
 PIXI.Assets.load('/l2d/CH0063_home.skel').then((resource) => {
-  window.l2d_complete = true
+  sound.add('bgm', {
+    url: '/l2d/Theme_21.ogg',
+    loop: true,
+    loaded: () => (window.l2d_complete = true)
+  })
   const animation = new Spine(resource.spineData)
   l2d.stage.addChild(animation)
 
@@ -74,11 +78,6 @@ PIXI.Assets.load('/l2d/CH0063_home.skel').then((resource) => {
     animation.y = (((2568 + 1600) * 0.3) / 2) * 2.4
     animation.x = ((3462 * 0.3) / 2) * 2.4
   }
-
-  sound.add('bgm', {
-    url: 'https://api.kivo.wiki/assets/musics/Theme_21.ogg',
-    loop: true
-  })
 
   sound.play('bgm')
 })

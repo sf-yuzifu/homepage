@@ -40,6 +40,7 @@ setInterval(() => {
         <img :src="imgList[1]" alt="" />
         <img :src="imgList[2]" alt="" />
         <img :src="imgList[3]" alt="" />
+        <img src="/box.png" alt="" />
       </div>
     </div>
     <div class="progress_wrapper">
