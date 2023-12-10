@@ -12,6 +12,7 @@ const loading = ref(true)
 const percent = ref(1)
 
 import NProgress from 'nprogress'
+import { sound } from '@pixi/sound'
 
 NProgress.start()
 
@@ -22,6 +23,7 @@ const load = setInterval(() => {
     percent.value = 1
     setTimeout(() => {
       loading.value = false
+      sound.play('bgm')
     }, 2000)
     clearInterval(load)
   }

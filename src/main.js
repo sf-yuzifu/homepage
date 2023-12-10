@@ -61,14 +61,23 @@ const l2d = new PIXI.Application({
 })
 document.querySelector('#background').appendChild(l2d.view)
 
+let myVid = document.createElement('video')
+let isSupp = myVid.canPlayType('audio/ogg; codecs="vorbis"')
+let url
+
+if (isSupp === '') {
+  url = '/l2d/bgm.m4a'
+} else {
+  url = '/l2d/Theme_21.ogg'
+}
+
 PIXI.Assets.load('/l2d/CH0063_home.skel').then((resource) => {
   sound.add('bgm', {
-    url: '/l2d/Theme_21.ogg',
+    url: url,
     loop: true
   })
 
   window.l2d_complete = true
-  sound.play('bgm')
 
   const animation = new Spine(resource.spineData)
   l2d.stage.addChild(animation)
