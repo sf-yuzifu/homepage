@@ -17,7 +17,7 @@ NProgress.start()
 
 const load = setInterval(() => {
   percent.value = NProgress.status
-  if (document.readyState === 'complete') {
+  if (document.readyState === 'complete' && window.l2d_complete === true) {
     NProgress.done()
     percent.value = 1
     setTimeout(() => {
@@ -63,7 +63,7 @@ main {
 }
 
 #background {
-  background-image: url('/aris.jpeg');
+  background-image: url('/Growth_Bg.png');
   background-position: center;
   background-size: cover;
   width: 100%;

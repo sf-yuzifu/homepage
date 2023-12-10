@@ -1,12 +1,12 @@
 @font-face {
   font-family: Blueaka;
   font-weight: 400;
-  src: url(/font/Blueaka.woff2) format('woff2');
+  src: url(https://kivo.wiki/assets/Blueaka-6aba1aec.woff2) format('woff2');
 }
 @font-face {
   font-family: Blueaka;
   font-weight: 700;
-  src: url(/font/Blueaka_Bold.woff2) format('woff2');
+  src: url(https://kivo.wiki/assets/Blueaka_Bold-857c002d.woff2) format('woff2');
 }
 
 * {

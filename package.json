@@ -13,6 +13,7 @@
     "bin-wrapper": "npm:bin-wrapper-china"
   },
   "dependencies": {
+    "@pixi/sound": "^5.2.2",
     "axios": "^1.5.0",
     "nprogress": "^0.2.0",
     "pixi-spine": "^4.0.4",

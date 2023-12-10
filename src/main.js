@@ -30,10 +30,7 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-const init = () => {}
-
-window.addEventListener('resize', init)
-init()
+window.l2d_complete = false
 
 setInterval(() => {
   document.querySelectorAll('a[href]:not(.tag)').forEach((link) => {
@@ -55,6 +52,7 @@ setInterval(() => {
 
 import * as PIXI from 'pixi.js'
 import { Spine } from 'pixi-spine'
+import { sound } from '@pixi/sound'
 
 const l2d = new PIXI.Application({
   width: 1000 * 2.4,
@@ -63,7 +61,8 @@ const l2d = new PIXI.Application({
 })
 document.querySelector('#background').appendChild(l2d.view)
 
-PIXI.Assets.load('CH0063_home.skel').then((resource) => {
+PIXI.Assets.load('/l2d/CH0063_home.skel').then((resource) => {
+  window.l2d_complete = true
   const animation = new Spine(resource.spineData)
   l2d.stage.addChild(animation)
 
@@ -75,4 +74,11 @@ PIXI.Assets.load('CH0063_home.skel').then((resource) => {
     animation.y = (((2568 + 1600) * 0.3) / 2) * 2.4
     animation.x = ((3462 * 0.3) / 2) * 2.4
   }
+
+  sound.add('bgm', {
+    url: 'https://api.kivo.wiki/assets/musics/Theme_21.ogg',
+    loop: true
+  })
+
+  sound.play('bgm')
 })
