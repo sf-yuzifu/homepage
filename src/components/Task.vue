@@ -21,7 +21,7 @@ const skip = () => {
   <div class="task css-cursor-hover-enabled" @click="skip"></div>
   <transition name="curtain">
     <div v-if="curtain" class="curtain">
-      <img src="/box.png" alt="" />
+      <img src="/shitim/Tran_Shitim_Icon.png" alt="" />
     </div>
   </transition>
 </template>
@@ -33,7 +33,7 @@ const skip = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/Growth_Bg.png') center;
+  background: url('/shitim/Event_Main_Stage_Bg.png') center;
   background-size: cover;
   z-index: 10;
   display: flex;
@@ -43,7 +43,7 @@ const skip = () => {
 
 .curtain img {
   width: 500px;
-  height: 500px;
+  height: auto;
 }
 
 .task {
@@ -108,7 +108,7 @@ const skip = () => {
 .curtain-enter-active {
   transition:
     opacity 0.1s ease-in-out,
-    transform 0.3s ease-in-out;
+    transform 0.25s ease-in-out;
 }
 
 @media screen and (max-width: 495px) {

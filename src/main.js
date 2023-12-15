@@ -54,9 +54,11 @@ import * as PIXI from 'pixi.js'
 import { Spine } from 'pixi-spine'
 import { sound } from '@pixi/sound'
 
+const scale = 2.8
+
 const l2d = new PIXI.Application({
-  width: 1000 * 2.4,
-  height: 720 * 2.4,
+  width: 1000 * scale,
+  height: 720 * scale,
   backgroundAlpha: 0
 })
 document.querySelector('#background').appendChild(l2d.view)
@@ -83,11 +85,11 @@ PIXI.Assets.load('/l2d/CH0063_home.skel').then((resource) => {
   l2d.stage.addChild(animation)
 
   if (animation.state.hasAnimation('Idle_01')) {
-    animation.scale.set(0.3 * 2.4)
+    animation.scale.set(0.3 * scale)
     animation.state.setAnimation(0, 'Idle_01', true)
     animation.state.timeScale = 1
     animation.autoUpdate = true
-    animation.y = (((2568 + 1600) * 0.3) / 2) * 2.4
-    animation.x = ((3462 * 0.3) / 2) * 2.4
+    animation.y = (((2568 + 1600) * 0.3) / 2) * scale
+    animation.x = ((3462 * 0.3) / 2) * scale
   }
 })

@@ -65,7 +65,7 @@ main {
 }
 
 #background {
-  background-image: url('/Growth_Bg.png');
+  background-image: url('/shitim/Event_Main_Stage_Bg.png');
   background-position: center;
   background-size: cover;
   width: 100%;
