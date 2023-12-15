@@ -20,6 +20,17 @@ document.body.onmouseenter = function () {
   document.querySelector('#cursor .inner').style.opacity = 1
 }
 
+document.body.onclick = function () {
+  let a = document.createElement('div')
+  a.classList.add('click')
+  a.style.left = posX.value - 75 / 2 + 'px'
+  a.style.top = posY.value - 75 / 2 + 'px'
+  document.body.appendChild(a)
+  setTimeout(() => {
+    a.remove()
+  }, 500)
+}
+
 document.oncontextmenu = function () {
   return false
 }
@@ -56,6 +67,48 @@ window.document.body.onmouseover = function (event) {
 <style>
 * {
   cursor: none !important;
+}
+
+.click {
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  background: #c3ebff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: scale(0%);
+  border: 3px solid transparent;
+  filter: drop-shadow(0px 0px 6px #c3ebff);
+  animation: move 0.5s ease-out;
+}
+
+@keyframes move {
+  0% {
+    transform: scale(0%);
+    border: 3px solid #77deff;
+    background: #c3ebff;
+  }
+  25% {
+    transform: scale(100%);
+    border: 3px solid #fff;
+    background: #c3ebff66;
+  }
+  50% {
+    transform: scale(100%);
+    border: 3px solid #fff;
+    background: transparent;
+  }
+  80% {
+    transform: scale(100%);
+    border: 3px solid transparent;
+    background: transparent;
+  }
+  100% {
+    transform: scale(100%);
+    border: 3px solid transparent;
+    background: transparent;
+  }
 }
 </style>
 
