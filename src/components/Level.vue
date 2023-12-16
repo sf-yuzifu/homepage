@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import config from '/_config.json'
 
-const exp = ref(1145)
-const nextExp = ref(1145)
+const exp = ref(config.exp)
+const nextExp = ref(config.nextExp)
 </script>
 
 <template>
@@ -10,20 +11,20 @@ const nextExp = ref(1145)
     <div class="container">
       <div class="level css-cursor-hover-enabled">
         <span>Lv.</span>
-        <p>87</p>
+        <p>{{ config.level }}</p>
       </div>
       <div class="right">
-        <span class="name">小鱼yuzifu</span>
+        <span class="name">{{ config.author }}</span>
         <div>
           <a-progress
             :percent="exp / nextExp"
             :show-text="false"
-            :color="exp === nextExp ? '#ffe433' : '#89d5fd'"
+            :color="exp >= nextExp ? '#ffe433' : '#89d5fd'"
             trackColor="#535E67"
           >
           </a-progress>
-          <p :style="{ color: exp === nextExp ? '#ffe433' : '#66E0FE' }">
-            {{ exp === nextExp ? 'MAX' : exp + '/' + nextExp }}
+          <p :style="{ color: exp >= nextExp ? '#ffe433' : '#66E0FE' }">
+            {{ exp >= nextExp ? 'MAX' : exp + '/' + nextExp }}
           </p>
         </div>
       </div>

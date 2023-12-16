@@ -1,0 +1,84 @@
+{
+  "title": "小鱼档案",
+  "description": "有关小鱼的《蔚蓝档案》风格的个人主页",
+  "favicon": "/favicon144.png",
+  "author": "小鱼yuzifu",
+  "keywords": "蔚蓝档案,小鱼yuzifu,个人主页",
+  "ICP": "",
+  "manifest": {
+    "name": "小鱼档案",
+    "short_name": "小鱼档案",
+    "description": "有关小鱼的《蔚蓝档案》风格的个人主页",
+    "theme_color": "#128AFA",
+    "start_url": "/",
+    "id": "Homepage",
+    "icons": [
+      {
+        "src": "/favicon512.png",
+        "sizes": "512x512",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/favicon144.png",
+        "sizes": "144x144"
+      }
+    ]
+  },
+  "level": 75,
+  "exp": 114514,
+  "nextExp": 1919,
+  "iconfont": "https://at.alicdn.com/t/c/font_4336463_0i6ly0yvyzb.js",
+  "dock": [
+    {
+      "name": "一起吃小鱼",
+      "href": "https://gitee.com/sf-yuzifu/eat-fish-together",
+      "imgSrc": "/img/fish.png"
+    },
+    {
+      "name": "编程猫格式工厂",
+      "href": "https://gitee.com/sf-yuzifu/bcm_convertor",
+      "imgSrc": "/img/convertor.png"
+    },
+    {
+      "name": "Waddle编辑器",
+      "href": "https://waddle.coco-central.cn/",
+      "imgSrc": "/img/waddle2.png"
+    },
+    {
+      "name": "PICKDUCK",
+      "href": "https://shequ.pgaot.com/",
+      "imgSrc": "/img/pickduck.png"
+    },
+    {
+      "name": "Boxy编辑器",
+      "href": "https://boxy.coco-central.cn/",
+      "imgSrc": "/img/boxy.png"
+    }
+  ],
+  "contact": [
+    {
+      "name": "QQ",
+      "href": "https://wpa.qq.com/msgrd?v=3&uin=1906929246&site=qq&menu=yes&jumpflag=1",
+      "iconfont": "icon-qq"
+    },
+    {
+      "name": "Gitee",
+      "href": "https://gitee.com/sf-yuzifu",
+      "iconfont": "icon-gitee"
+    },
+    {
+      "name": "Github",
+      "href": "https://github.com/sf-yuzifu",
+      "iconfont": "icon-github"
+    },
+    {
+      "name": "BiliBili",
+      "href": "https://space.bilibili.com/447666445",
+      "iconfont": "icon-bilibili"
+    }
+  ],
+  "task": {
+    "name": "个人博客",
+    "href": "https://blog.yzf.moe/"
+  }
+}

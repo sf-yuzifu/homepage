@@ -1,12 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+import config from '/_config.json'
 
 const curtain = ref(false)
 
 const skip = () => {
   curtain.value = true
   setTimeout(() => {
-    window.open('https://blog.yzf.moe')
+    window.open(config.task.href)
   }, 1000)
   setTimeout(
     () => {
@@ -18,7 +19,7 @@ const skip = () => {
 </script>
 
 <template>
-  <div class="task css-cursor-hover-enabled" @click="skip"></div>
+  <div :name="config.task.name" class="task css-cursor-hover-enabled" @click="skip"></div>
   <transition name="curtain">
     <div v-if="curtain" class="curtain">
       <img src="/shitim/Tran_Shitim_Icon.png" alt="" />
@@ -70,7 +71,7 @@ const skip = () => {
 }
 
 .task:after {
-  content: '个人博客';
+  content: attr(name);
   position: absolute;
   left: 10px;
   bottom: 0;

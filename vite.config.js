@@ -6,6 +6,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteCompression from 'vite-plugin-compression'
 import viteImagemin from 'vite-plugin-imagemin'
 import { VitePWA } from 'vite-plugin-pwa'
+import { createHtmlPlugin } from 'vite-plugin-html'
+import config from './_config.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +18,17 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    createHtmlPlugin({
+      inject: {
+        data: {
+          title: config.title,
+          favicon: config.favicon,
+          themeColor: config.manifest.theme_color,
+          description: config.description,
+          keywords: config.keywords
+        }
+      }
+    }),
     viteImagemin({
       gifsicle: {
         optimizationLevel: 7,
@@ -28,8 +41,8 @@ export default defineConfig({
         quality: 50
       },
       pngquant: {
-        quality: [0.8, 0.9],
-        speed: 4
+        quality: [0.9, 1],
+        speed: 8
       },
       svgo: {
         plugins: [
@@ -66,25 +79,7 @@ export default defineConfig({
           }
         ]
       },
-      manifest: {
-        name: 'Homepage',
-        short_name: 'Homepage',
-        description: "sf-yuzifu's homepage.",
-        theme_color: '#128AFA',
-        start_url: '/',
-        id: 'Homepage',
-        icons: [
-          {
-            src: '/favicon512.png',
-            sizes: '512x512',
-            purpose: 'any maskable'
-          },
-          {
-            src: '/favicon144.png',
-            sizes: '144x144'
-          }
-        ]
-      }
+      manifest: config.manifest
     }),
     viteCompression({
       threshold: 10240 // the unit is Bytes

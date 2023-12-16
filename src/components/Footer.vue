@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import config from '/_config.json'
+import { Icon } from '@arco-design/web-vue'
 
+const IconFont = Icon.addFromIconFontCn({
+  src: config.iconfont
+})
 const time = ref(new Date().getHours() + ':' + new Date().getMinutes())
 
 const addZero = (time) => {
@@ -15,28 +20,10 @@ setInterval(() => {
 <template>
   <div class="footer">
     <div class="project-box">
-      <a
-        href="https://gitee.com/sf-yuzifu/eat-fish-together"
-        class="project css-cursor-hover-enabled"
-      >
-        <img src="/img/fish.png" alt="" />
-        <span>一起吃小鱼</span>
-      </a>
-      <a href="https://gitee.com/sf-yuzifu/bcm_convertor" class="project css-cursor-hover-enabled">
-        <img src="/img/convertor.png" alt="" />
-        <span>编程猫格式工厂</span>
-      </a>
-      <a href="https://waddle.coco-central.cn/" class="project css-cursor-hover-enabled">
-        <img src="/img/waddle2.png" alt="" />
-        <span>Waddle编辑器</span>
-      </a>
-      <a href="https://shequ.pickduck.cn/" class="project css-cursor-hover-enabled">
-        <img src="/img/pickduck.png" alt="" />
-        <span>PICKDUCK</span>
-      </a>
-      <a href="https://boxy.coco-central.cn/" class="project css-cursor-hover-enabled">
-        <img src="/img/boxy.png" alt="" />
-        <span>Boxy编辑器</span>
+      <a v-for="site in config.dock" :href="site.href" class="project css-cursor-hover-enabled">
+        <img v-if="site.imgSrc" :src="site.imgSrc" alt="" />
+        <icon-font v-if="site.iconfont" :type="site.iconfont" />
+        <span>{{ site.name }}</span>
       </a>
     </div>
     <div class="time">
@@ -60,6 +47,7 @@ setInterval(() => {
   justify-content: center;
   filter: drop-shadow(0px 0px 6px #0003);
   transition: all 0.3s;
+  align-items: flex-end;
 }
 
 .footer::after {
@@ -76,12 +64,17 @@ setInterval(() => {
 
 .project-box {
   width: calc(100% - 120px);
-  height: 100%;
+  height: calc(100% + 20px + 24px);
   transform: skew(20deg);
   position: absolute;
   left: 20px;
   display: inline-flex;
   align-items: flex-end;
+  overflow: auto;
+}
+
+.project-box::-webkit-scrollbar {
+  display: none;
 }
 
 .time {
@@ -125,10 +118,11 @@ setInterval(() => {
   margin: 5px 0 0;
   color: #003153;
   font-size: 16px;
+  word-break: keep-all;
 }
 
 .arco-icon {
-  font-size: 48px;
+  font-size: 64px;
 }
 
 .project img {
@@ -150,6 +144,10 @@ setInterval(() => {
   .project {
     margin: 0;
   }
+
+  .project span {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -158,20 +156,12 @@ setInterval(() => {
     height: 48px;
   }
 
-  .project span {
-    font-size: 12px;
-  }
-
   .footer::after {
     width: calc(100% - 120px);
   }
 }
 
 @media screen and (max-width: 495px) {
-  .project span {
-    display: none;
-  }
-
   .project {
     bottom: 0;
   }
@@ -185,6 +175,7 @@ setInterval(() => {
     transform: skew(0deg);
     width: calc(100% - 40px);
     height: 80px;
+    align-items: center;
   }
 
   .footer::after {

@@ -1,31 +1,22 @@
 <script setup>
 import { Icon } from '@arco-design/web-vue'
+import config from '/_config.json'
 
 const IconFont = Icon.addFromIconFontCn({
-  src: 'https://at.alicdn.com/t/c/font_4336463_0i6ly0yvyzb.js'
+  src: config.iconfont
 })
 </script>
 
 <template>
   <div class="contact-box">
     <a
-      href="https://wpa.qq.com/msgrd?v=3&uin=1906929246&site=qq&menu=yes&jumpflag=1"
+      v-for="contact in config.contact"
+      :href="contact.href"
       class="contact css-cursor-hover-enabled"
     >
-      <icon-font type="icon-qq" />
-      <span>QQ</span>
-    </a>
-    <a href="https://gitee.com/sf-yuzifu" class="contact css-cursor-hover-enabled">
-      <icon-font type="icon-gitee" />
-      <span>Gitee</span>
-    </a>
-    <a href="https://github.com/sf-yuzifu" class="contact css-cursor-hover-enabled">
-      <icon-font type="icon-github" />
-      <span>Github</span>
-    </a>
-    <a href="https://space.bilibili.com/447666445" class="contact css-cursor-hover-enabled">
-      <icon-font type="icon-bilibili" />
-      <span>BiliBili</span>
+      <img v-if="contact.imgSrc" :src="contact.imgSrc" alt="" />
+      <icon-font v-if="contact.iconfont" :type="contact.iconfont" />
+      <span>{{ contact.name }}</span>
     </a>
   </div>
 </template>
@@ -77,6 +68,7 @@ const IconFont = Icon.addFromIconFontCn({
 
 .contact img {
   height: 48px;
+  filter: drop-shadow(0px 0px 4px #fff6);
 }
 
 .contact:active {
