@@ -3,23 +3,32 @@ import { ref } from 'vue'
 import config from '/_config.json'
 
 const curtain = ref(false)
+const bg = ref(false)
 
 const skip = () => {
-  curtain.value = true
+  bg.value = true
   setTimeout(() => {
-    window.open(config.task.href)
+    curtain.value = true
+    setTimeout(() => {
+      window.open(config.task.href)
+    }, 1000)
+    setTimeout(
+      () => {
+        curtain.value = false
+        bg.value = false
+      },
+      Math.floor(Math.random() * 2 + 4) * 500
+    )
   }, 1000)
-  setTimeout(
-    () => {
-      curtain.value = false
-    },
-    Math.floor(Math.random() * 4 + 2) * 500
-  )
 }
 </script>
 
 <template>
   <div :name="config.task.name" class="task css-cursor-hover-enabled" @click="skip"></div>
+  <transition name="curtain">
+    <video v-if="bg" autoplay src="/transfrom.webm" class="bg"></video>
+  </transition>
+
   <transition name="curtain">
     <div v-if="curtain" class="curtain">
       <img src="/shitim/Tran_Shitim_Icon.png" alt="" />
@@ -28,6 +37,13 @@ const skip = () => {
 </template>
 
 <style scoped>
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
 .curtain {
   position: absolute;
   top: 0;
