@@ -1,7 +1,7 @@
 <h1 align="center">小鱼档案</h1>
 
 <p align="center">
-<a href='https://gitee.com/sf-yuzifu/homepage/stargazers'><img src='https://gitee.com/sf-yuzifu/homepage/badge/star.svg?theme=dark' alt='star'></img></a>
+<a href='https://gitee.com/sf-yuzifu/homepage/stargazers'><img src='https://gitee.com/sf-yuzifu/homepage/badge/star.svg?theme=dark' alt='star' /></a>
 <a href='https://github.com/sf-yuzifu/homepage/stargazers'><img alt="GitHub stars" src="https://img.shields.io/github/stars/sf-yuzifu/homepage?style=social"></a>
 </p>
 
@@ -20,6 +20,7 @@
 - [x] 弹窗复刻
 - [x] 什亭之箱转场
 - [x] 点击特效和动效
+- [x] 多个学生大厅l2d切换
 
 ## 技术栈
 
@@ -116,3 +117,7 @@ yarn preview
   }
 }
 ```
+
+## 有关学生回忆大厅L2D文件获取
+1. 自己去解包（[教程1](https://www.bilibili.com/read/cv15934670/)、[教程2](https://www.bilibili.com/read/cv18073492/)）
+2. 去[基沃托斯古书馆](https://kivo.wiki/)中的“角色图鉴”——“切换到鉴赏模式”——“回忆大厅”当中自行获取

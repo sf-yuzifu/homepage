@@ -190,6 +190,6 @@ a {
 }
 
 #background canvas {
-  height: max(100vh,130vw * (1728 / 2400));
-  width: max(calc(100vh / (1728 / 2400)),130vw);
+  height: max(100vh, 110vw * (720 / 1000));
+  width: max(100vh / (720 / 1000), 110vw);
 }

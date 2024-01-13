@@ -6,13 +6,13 @@ import Toolbox from '@/components/Toolbox.vue'
 import Contact from '@/components/Contact.vue'
 import Task from '@/components/Task.vue'
 import Loading from '@/components/Loading.vue'
+import Background from '@/components/Background.vue'
 import { ref } from 'vue'
 
 const loading = ref(true)
 const percent = ref(1)
 
 import NProgress from 'nprogress'
-import { sound } from '@pixi/sound'
 
 NProgress.start()
 
@@ -23,7 +23,6 @@ const load = setInterval(() => {
     percent.value = 1
     setTimeout(() => {
       loading.value = false
-      sound.play('bgm')
     }, 2000)
     clearInterval(load)
   }
@@ -36,6 +35,7 @@ const load = setInterval(() => {
   </transition>
   <div id="background"></div>
   <main v-if="!loading">
+    <Background></Background>
     <Level></Level>
     <Toolbox></Toolbox>
     <Contact></Contact>
