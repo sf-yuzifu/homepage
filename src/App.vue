@@ -11,6 +11,7 @@ import { ref } from 'vue'
 
 const loading = ref(true)
 const percent = ref(1)
+const l2dOnly = ref(false)
 
 import NProgress from 'nprogress'
 
@@ -27,6 +28,10 @@ const load = setInterval(() => {
     clearInterval(load)
   }
 }, 1)
+
+const switchL2D = () => {
+  l2dOnly.value = !l2dOnly.value
+}
 </script>
 
 <template>
@@ -35,12 +40,18 @@ const load = setInterval(() => {
   </transition>
   <div id="background"></div>
   <main v-if="!loading">
-    <Background></Background>
-    <Level></Level>
-    <Toolbox></Toolbox>
-    <Contact></Contact>
-    <Task></Task>
-    <Footer></Footer>
+    <Background :l2dOnly="l2dOnly"></Background>
+    <transition name="up">
+      <Level v-if="!l2dOnly"></Level>
+    </transition>
+    <Toolbox :l2dOnly="l2dOnly" @switch="switchL2D"></Toolbox>
+    <transition name="left">
+      <Contact v-if="!l2dOnly"></Contact>
+    </transition>
+    <Task :l2dOnly="l2dOnly"></Task>
+    <transition name="down">
+      <Footer v-if="!l2dOnly"></Footer>
+    </transition>
     <div id="curtain"></div>
   </main>
   <Cursor></Cursor>
@@ -62,6 +73,48 @@ main {
 
 .loading-leave-active {
   transition: opacity 0.5s ease-in-out;
+}
+
+.up-leave-to,
+.up-enter-from {
+  transform: translateY(-300px);
+}
+
+.up-leave-from,
+.up-enter-to {
+  transform: translateY(0);
+}
+
+.down-leave-to,
+.down-enter-from {
+  transform: translateY(300px) skew(-20deg);
+}
+
+.down-leave-from,
+.down-enter-to {
+  transform: translateY(0) skew(-20deg);
+}
+
+.left-leave-to,
+.left-enter-from {
+  transform: translateX(-300px);
+}
+
+.left-leave-from,
+.left-enter-to {
+  transform: translateX(0);
+}
+
+.up-leave-active,
+.down-leave-active,
+.left-leave-active {
+  transition: transform 0.3s ease-in;
+}
+
+.up-enter-active,
+.down-enter-active,
+.left-enter-active {
+  transition: transform 0.3s ease-out;
 }
 
 #background {

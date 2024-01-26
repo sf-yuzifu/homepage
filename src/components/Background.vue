@@ -4,6 +4,8 @@ import * as PIXI from 'pixi.js'
 import { studentsL2D, bgmName } from '@/main'
 import { sound } from '@pixi/sound'
 
+const props = defineProps(['l2dOnly'])
+
 const scale = 2.8
 
 let url,
@@ -48,7 +50,7 @@ setL2D(id)
 </script>
 
 <template>
-  <div id="change">
+  <div id="change" v-if="!props.l2dOnly">
     <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/l2d/arrow.png" alt="" />
     <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/l2d/arrow.png" alt="" />
   </div>

@@ -5,6 +5,8 @@ import config from '/_config.json'
 const curtain = ref(false)
 const bg = ref(false)
 
+const props = defineProps(['l2dOnly'])
+
 const skip = () => {
   bg.value = true
   setTimeout(() => {
@@ -24,7 +26,14 @@ const skip = () => {
 </script>
 
 <template>
-  <div :name="config.task.name" class="task css-cursor-hover-enabled" @click="skip"></div>
+  <transition name="down2">
+    <div
+      v-if="!props.l2dOnly"
+      :name="config.task.name"
+      class="task css-cursor-hover-enabled"
+      @click="skip"
+    ></div>
+  </transition>
   <transition name="curtain">
     <video v-if="bg" autoplay src="/transfrom.webm" class="bg"></video>
   </transition>
@@ -132,5 +141,23 @@ const skip = () => {
   .task {
     right: 40px;
   }
+}
+
+.down2-leave-to,
+.down2-enter-from {
+  transform: translateY(300px);
+}
+
+.down2-leave-from,
+.down2-enter-to {
+  transform: translateY(0);
+}
+
+.down2-leave-active {
+  transition: transform 0.3s ease-in;
+}
+
+.down2-enter-active {
+  transition: transform 0.3s ease-out;
 }
 </style>
