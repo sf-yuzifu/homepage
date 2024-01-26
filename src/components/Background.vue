@@ -19,7 +19,7 @@ const l2d = new PIXI.Application({
 document.querySelector('#background').appendChild(l2d.view)
 
 const setL2D = (num) => {
-  sound.stop(bgmName[id])
+  sound.stopAll()
   l2d.stage.removeChild(animation)
   switch (num) {
     case '-':
@@ -70,6 +70,7 @@ img {
   width: 32px;
   height: auto;
   animation: move 2s ease-in-out infinite;
+  z-index: 1000;
 }
 
 img:last-child {

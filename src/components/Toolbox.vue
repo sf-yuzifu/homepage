@@ -1,7 +1,10 @@
 <script setup>
 import { Modal } from '@arco-design/web-vue'
-import { h } from 'vue'
+import { h, ref } from 'vue'
 import config from '/_config.json'
+
+const max_ap = 60 + config.level * 2
+const ap = ref(max_ap)
 
 const about = () => {
   Modal.open({
@@ -26,13 +29,37 @@ const about = () => {
     footer: false
   })
 }
+
+setInterval(() => {
+  ap.value =
+    max_ap -
+    Math.trunc(
+      max_ap *
+        ((new Date().getTime() -
+          new Date(
+            `${new Date().getFullYear()}-${
+              new Date().getMonth() + 1
+            }-${new Date().getDate()} 00:00:00`
+          )) /
+          86400000)
+    )
+}, 10)
 </script>
 
 <template>
   <div class="toolbox-box">
-    <!--    <div class="toolbox"></div>-->
-    <!--    <div class="toolbox"></div>-->
-    <!--    <div class="toolbox"></div>-->
+    <div class="toolbox">
+      <img src="/img/ap.png" alt="" />
+      <span>{{ ap + '/' + max_ap }}</span>
+    </div>
+    <div class="toolbox">
+      <img src="/img/gold.png" alt="" />
+      <span>11,451,419</span>
+    </div>
+    <div class="toolbox">
+      <img src="/img/pyroxene.png" alt="" />
+      <span>24,000</span>
+    </div>
     <a class="about toolbox" @click="about">
       <icon-info-circle class="css-cursor-hover-enabled" />
     </a>
@@ -49,16 +76,28 @@ const about = () => {
 
 .toolbox-box .toolbox {
   width: 220px;
-  height: 60px;
+  height: 56px;
   background: #fffd;
   color: #003153;
-  margin: 0 20px;
+  margin: 0 10px;
   transform: skew(-10deg);
   border-radius: 6px;
   filter: drop-shadow(0px 0px 3px #0003);
   transition:
     background-color 0.3s,
     transform 0.1s;
+  display: flex;
+  align-items: center;
+}
+
+.toolbox img {
+  height: 70%;
+  transform: skew(10deg);
+  margin: 0 8px 0 10px;
+}
+.toolbox span {
+  font-size: 26px;
+  transform: skew(10deg);
 }
 
 .toolbox-box .toolbox.about {
@@ -79,5 +118,10 @@ const about = () => {
 .arco-icon {
   font-size: 32px;
   transform: skew(10deg);
+}
+@media screen and (max-width: 1199px) {
+  .toolbox:not(.about) {
+    display: none;
+  }
 }
 </style>

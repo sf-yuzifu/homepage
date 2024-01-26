@@ -76,7 +76,6 @@ export let bgmName = []
     studentsL2D.push(await PIXI.Assets.load(i))
   }
   for (let i of l2dBGM) {
-    console.log(i.split('/').pop().split('.')[0])
     sound.add(i.split('/').pop().split('.')[0], {
       url: i,
       loop: true
