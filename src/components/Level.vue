@@ -123,7 +123,7 @@ const nextExp = ref(config.nextExp)
   }
 
   .level-box:hover {
-    width: calc(100% - 76px);
+    width: calc(100% - 60px);
   }
 
   .level-box:hover .right {
@@ -134,7 +134,7 @@ const nextExp = ref(config.nextExp)
     width: 100px;
     transition: all 0.3s;
     z-index: 10;
-    left: 36px;
+    left: 30px;
     transform: skewX(-10deg);
     border-radius: 8px;
   }

@@ -6,8 +6,22 @@ const emit = defineEmits(['switch'])
 const props = defineProps(['l2dOnly'])
 
 const max_ap = 60 + config.level * 2
-const ap = ref(max_ap)
+const ap = ref(
+  max_ap -
+    Math.trunc(
+      max_ap *
+        ((new Date().getTime() -
+          new Date(
+            `${new Date().getFullYear()}-${
+              new Date().getMonth() + 1
+            }-${new Date().getDate()} 00:00:00`
+          )) /
+          86400000)
+    )
+)
 const img = ref('/img/max.png')
+const showMin = ref(false)
+const hover = ref(window.matchMedia('(hover: none)').matches)
 
 const about = () => {
   Modal.open({
@@ -38,20 +52,21 @@ const change = () => {
   emit('switch')
 }
 
+document.body.addEventListener('click', () => {
+  if (props.l2dOnly && hover.value) {
+    showMin.value = !showMin.value
+  } else {
+    showMin.value = true
+  }
+})
+
+window.matchMedia('(hover: none)').addListener((e) => {
+  hover.value = e.matches
+})
+
 setInterval(() => {
-  ap.value =
-    max_ap -
-    Math.trunc(
-      max_ap *
-        ((new Date().getTime() -
-          new Date(
-            `${new Date().getFullYear()}-${
-              new Date().getMonth() + 1
-            }-${new Date().getDate()} 00:00:00`
-          )) /
-          86400000)
-    )
-}, 10)
+  ap.value++
+}, 60000)
 </script>
 
 <template>
@@ -98,11 +113,12 @@ setInterval(() => {
     </a>
     <a
       class="l2d toolbox"
+      :class="{ canHover: !hover }"
       @click="change"
       :style="{
         transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-76px)') + ' skew(-10deg)',
         transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in') + ',opacity 0.6s',
-        opacity: !props.l2dOnly ? 1 : 0
+        opacity: !props.l2dOnly || (showMin && hover) ? 1 : 0
       }"
     >
       <img alt="" :src="img" />
@@ -158,10 +174,6 @@ setInterval(() => {
   top: 76px;
 }
 
-.toolbox-box .toolbox.l2d:hover {
-  opacity: 1 !important;
-}
-
 .toolbox.l2d img {
   filter: drop-shadow(-100vw 0px 0px #003153);
   transform: translateX(100vw);
@@ -186,5 +198,9 @@ setInterval(() => {
   .toolbox:not(.about) {
     display: none;
   }
+}
+
+.toolbox-box .toolbox.l2d.canHover:hover {
+  opacity: 1 !important;
 }
 </style>

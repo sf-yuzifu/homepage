@@ -95,6 +95,28 @@ main {
   transform: translateY(0) skew(-20deg);
 }
 
+@media screen and (max-width: 495px) {
+  .down-leave-to,
+  .down-enter-from {
+    transform: translateY(300px);
+  }
+
+  .down-leave-from,
+  .down-enter-to {
+    transform: translateY(0);
+  }
+
+  .up-leave-to,
+  .up-enter-from {
+    transform: translateY(-300px) skew(-10deg);
+  }
+
+  .up-leave-from,
+  .up-enter-to {
+    transform: translateY(0) skew(-10deg);
+  }
+}
+
 .left-leave-to,
 .left-enter-from {
   transform: translateX(-300px);
