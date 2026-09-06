@@ -16,18 +16,11 @@
     "transition:mov": "ffmpeg -y -c:v libvpx-vp9 -i public/transfrom.webm -an -vf format=rgba,premultiply=inplace=1 -c:v hevc_videotoolbox -require_sw 1 -alpha_quality 0.75 -tag:v hvc1 -q:v 30 public/transfrom.mov"
   },
   "resolutions": {
-    "bin-wrapper": "npm:bin-wrapper-china",
     "rollup": "^4.34.9",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-replace": "^6.0.1",
-    "qs": "^6.14.0",
     "minimatch": "^10.0.1",
-    "fast-xml-parser": "^5.0.9",
-    "@isaacs/brace-expansion": "^5.0.1",
     "glob": "^11.0.1",
-    "got": "^14.4.6",
-    "esbuild": "^0.25.0",
-    "lodash": "^4.17.21",
     "koffi": "2.10.0",
     "@esotericsoftware/spine-core": "4.2.120",
     "@esotericsoftware/spine-pixi-v8": "4.2.120"
@@ -52,6 +45,7 @@
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.10.0",
+    "esbuild": "^0.25.12",
     "globals": "^17.12.0",
     "jiti": "^2.7.0",
     "js-yaml": "^5.4.1",
