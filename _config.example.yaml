@@ -21,7 +21,7 @@ url: 'https://example.com'
 
 # 社交分享卡片（OG 图）源图，路径相对仓库根目录
 # 构建时用 sharp 裁切为 1200×630 的 /og-home.jpg 与 /og-bio.jpg（bio/ 路由的独立卡片）
-# 缺省用 shots/zh/ 下两张 README 截图；fork 后建议替换为自己的截图，勿直接删除
+# 缺省用 shots/zh/pic1.png / pic2.png 两张存档截图；fork 后建议替换为自己的截图，勿直接删除
 og:
   home: shots/zh/pic1.png
   bio: shots/zh/pic2.png

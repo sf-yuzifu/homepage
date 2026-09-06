@@ -15,7 +15,6 @@
 <div align="center">A Blue Archive-style personal homepage for me.</div>
 
 ![Fish Archive](shots/en/pic1.png)
-![Fish Archive - bio](shots/en/pic2.png)
 
 ## 📖 Introduction
 
@@ -38,6 +37,7 @@ All site content (site info, contacts, project showcase, music list, Live2D char
 - Global viewing mode (hide UI and enjoy the memorial lobby)
 - Head-patting: long-press the head area and the student's head follows your finger
 - Tap to talk: trigger character lines and voice
+- Dialogue bubble viewport clamping: near screen edges the bubble shrinks and wraps, and shifts vertically to stay fully visible
 - Gaze following: the student looks at your pointer while dragging (parameters extracted from official game resources)
 - Cheek dragging / special bone dragging interactions
 - Random blinking and idle motions
@@ -60,6 +60,21 @@ All site content (site info, contacts, project showcase, music list, Live2D char
 - CJK fonts are subsetted at build time (cn-font-split) and loaded on demand via unicode-range
 - Arco Design imported on demand, route-level lazy loading, grouped vendor chunking
 - Automatic image optimization and gzip compression
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="shots/en/pic1.png" alt="Desktop" />
+</p>
+<p align="center">
+  <img src="shots/en/settings.png" alt="Settings" />
+</p>
+<p align="center">
+  <img src="shots/en/pic2.png" alt="Bio" />
+</p>
+<p align="center">
+  <img src="shots/en/mobile.png" alt="Mobile" />
+</p>
 
 ## 🔗 Preview
 

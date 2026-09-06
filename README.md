@@ -15,7 +15,6 @@
 <div align="center">有关小鱼的《蔚蓝档案》风格的个人主页</div>
 
 ![小鱼档案](shots/zh/pic1.png)
-![小鱼档案 - 个人简介](shots/zh/pic2.png)
 
 ## 📖 项目简介
 
@@ -38,6 +37,7 @@
 - 全局观赏模式（隐藏 UI，纯享回忆大厅）
 - 摸头互动：长按头部区域，学生头部跟随手指
 - 点击对话：触发角色台词与语音
+- 台词气泡视口收边：角色贴近屏幕边缘时自动压缩换行、垂直收进屏幕，台词始终完整可见
 - 视线跟随：按住拖动时学生看向触点（参数取自官方资源解包）
 - 捏脸 / 特殊骨骼拖拽互动
 - 随机眨眼与待机小动作
@@ -60,6 +60,21 @@
 - 中文字体构建时子集化（cn-font-split），按 unicode-range 分片按需加载
 - Arco Design 按需引入、路由懒加载、第三方依赖分组分包
 - 图片自动优化与 gzip 压缩
+
+## 📸 界面预览
+
+<p align="center">
+  <img src="shots/zh/pic1.png" alt="桌面端" />
+</p>
+<p align="center">
+  <img src="shots/zh/settings.png" alt="设置" />
+</p>
+<p align="center">
+  <img src="shots/zh/pic2.png" alt="个人简介" />
+</p>
+<p align="center">
+  <img src="shots/zh/mobile.png" alt="移动端" />
+</p>
 
 ## 🔗 在线预览
 
