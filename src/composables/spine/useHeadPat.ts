@@ -1,5 +1,5 @@
 import type { AnimationStateListener } from '@esotericsoftware/spine-core'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { PatConfig } from '@/types/config'
 import type { SpineInteractionContext } from './types'
 import { DragBoneController } from './useDragBone'

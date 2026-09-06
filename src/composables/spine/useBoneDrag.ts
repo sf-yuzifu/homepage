@@ -1,4 +1,4 @@
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { SpineInteractionContext, DragTarget, DragClips } from './types'
 import { DragBoneController } from './useDragBone'
 import { detectDragBones, findBoneByCandidates, HAND_FOLLOW_BONE_CANDIDATES } from './boneDetect'

@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { Application } from 'pixi.js'
 import { hitTestBones, hitTestHeadRegion } from './boneDetect'
 import type { DragTarget, SpineInteractionContext } from './types'

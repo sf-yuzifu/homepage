@@ -9,7 +9,7 @@ import {
   type Ref
 } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
-import { Spine } from '@esotericsoftware/spine-pixi-v7'
+import { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { AnimationState, AnimationStateListener } from '@esotericsoftware/spine-core'
 import * as PIXI from 'pixi.js'
 import { Modal } from '@arco-design/web-vue'
@@ -24,7 +24,7 @@ import { initTracks } from './useSpineTracks'
 
 export type L2DTarget = number | '+' | '-'
 
-const LIVE2D_TIME_SCALE = 0.6
+const LIVE2D_TIME_SCALE = 1
 
 const parseOffset = (offset: number | string | undefined, fallback = 0.7): number => {
   const parsed = Number(offset)
@@ -111,7 +111,17 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
     if (failed) emit('webgl-failed')
   }
 
-  const l2d = tryCreatePixiApp({
+  // PIXI 8：应用只能异步创建（构造器不再接受参数）。appReady 收敛创建时序，
+  // 所有依赖 app/canvas/stage 的操作（挂载 canvas、加载角色、生命周期钩子）都经它就绪后再执行；
+  // 创建失败时置 webglFailed，由 onMounted 里的 appReady 分支降级 revealHud（静态背景）
+  let l2d: PIXI.Application | null = null
+  let canvas: HTMLCanvasElement | null = null
+  let spineLayer: PIXI.Container | null = null
+  // 组件是否处于 keep-alive 激活窗口（onActivated/onDeactivated 维护）：
+  // 防止 appReady 在组件停用后才 resolve，错误地把 ticker 重新拉起
+  let viewActive = false
+
+  const appReady: Promise<PIXI.Application | null> = tryCreatePixiApp({
     width: 2560,
     height: 1440,
     backgroundAlpha: 0,
@@ -120,34 +130,26 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
     antialias: false,
     resolution: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 1.5),
     powerPreference: 'high-performance'
-  })
-  const canvas = (l2d?.view as HTMLCanvasElement | undefined) ?? null
-  const spineLayer = l2d?.stage ?? null
-
-  if (!l2d || !canvas || !spineLayer) {
-    webglFailed.value = true
-    onMounted(() => revealHud(true))
-    return {
-      app: null,
-      canvas: null,
-      webglFailed,
-      getSpine: () => null,
-      getId: () => 0,
-      isReady: () => false,
-      setL2D: async () => {},
-      skipStartIdle: () => revealHud()
+  }).then((app) => {
+    if (!app) {
+      webglFailed.value = true
+      return null
     }
-  }
+    l2d = app
+    canvas = app.canvas as HTMLCanvasElement
+    spineLayer = app.stage
+    return app
+  })
 
   const handleContextLost = (event: Event) => {
     event.preventDefault()
     if (webglFailed.value) return
     webglFailed.value = true
-    l2d.ticker.stop()
+    l2d?.ticker.stop()
     talkPlayer.stopAllVoices()
     pointer.removeEventListenersFromCanvas()
-    canvas.removeEventListener('webglcontextlost', handleContextLost)
-    if (canvas.parentNode) canvas.parentNode.removeChild(canvas)
+    canvas?.removeEventListener('webglcontextlost', handleContextLost)
+    if (canvas?.parentNode) canvas.parentNode.removeChild(canvas)
     revealHud(true)
   }
 
@@ -214,6 +216,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
   }
 
   const applyCanvasOffset = (lobby: NonNullable<AppConfig['memorialLobbies']>[number]) => {
+    if (!canvas) return
     originalOffsetPercent = parseOffset(lobby.offset) * 100
     canvas.style.transform = `translateX(calc((50% - ${originalOffsetPercent} * 1%) * (1 - min(1, 100vw / 1200px))))`
     pointer.invalidateViewRect()
@@ -221,7 +224,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
 
   const finishSpineSetup = (spine: Spine, skeletonPath: string, atlasPath: string) => {
     initTracks(spine)
-    spineLayer.addChild(spine)
+    spineLayer?.addChild(spine)
     loadedL2DKey = skeletonPath + '|' + atlasPath
     spine.scale.set(0.85)
     spine.state.setAnimation(0, 'Idle_01', true)
@@ -234,6 +237,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
 
   const doSetL2D = async (num: L2DTarget): Promise<void> => {
     if (webglFailed.value) return
+    if (!(await appReady)) return
     addCanvasToBackground()
 
     if (!currentConfig.value?.memorialLobbies) {
@@ -278,7 +282,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
 
     if (animation) {
       detachInteractions()
-      spineLayer.removeChild(animation)
+      spineLayer?.removeChild(animation)
       animation.destroy()
       animation = null
     }
@@ -294,7 +298,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
       // 失败自动重试 3 次（预加载阶段已失败的角色，切换/进场时再试一次）
       await retryAsync(() => PIXI.Assets.load([skeletonAlias, atlasAlias]))
 
-      animation = Spine.from(skeletonAlias, atlasAlias)
+      animation = Spine.from({ skeleton: skeletonAlias, atlas: atlasAlias })
       if (!animation) return
       finishSpineSetup(animation, skeletonPath, atlasPath)
     } catch (error) {
@@ -376,6 +380,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
 
   const loadL2DSkipIdle = async (num: number): Promise<void> => {
     if (webglFailed.value) return
+    if (!(await appReady)) return
     addCanvasToBackground()
 
     if (!currentConfig.value?.memorialLobbies) {
@@ -409,7 +414,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
       // 失败自动重试 3 次（预加载阶段已失败的角色，返回大厅时再试一次）
       await retryAsync(() => PIXI.Assets.load([skeletonAlias, atlasAlias]))
 
-      animation = Spine.from(skeletonAlias, atlasAlias)
+      animation = Spine.from({ skeleton: skeletonAlias, atlas: atlasAlias })
       if (!animation) return
       finishSpineSetup(animation, skeletonPath, atlasPath)
     } catch (error) {
@@ -437,7 +442,7 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
       if (animation.state) {
         animation.state.listeners = []
       }
-      spineLayer.removeChild(animation)
+      spineLayer?.removeChild(animation)
       animation.destroy()
       animation = null
     }
@@ -514,9 +519,16 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
   }
 
   onMounted(() => {
-    addCanvasToBackground()
-    canvas.addEventListener('webglcontextlost', handleContextLost)
     window.addEventListener('resize', handleWindowResize)
+    void appReady.then((app) => {
+      if (!app) {
+        revealHud(true)
+        return
+      }
+      if (isComponentUnmounted || !canvas) return
+      addCanvasToBackground()
+      canvas.addEventListener('webglcontextlost', handleContextLost)
+    })
   })
 
   onBeforeRouteLeave(() => {
@@ -524,25 +536,31 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
   })
 
   onActivated(() => {
-    if (webglFailed.value) {
-      revealHud(true)
-      return
-    }
-    l2d.ticker.start()
-    addCanvasToBackground()
-    if (!animation && currentConfig.value?.memorialLobbies) {
-      if (isFirstLoad) {
-        setL2D(id)
-        isFirstLoad = false
-      } else {
-        loadL2DSkipIdle(id)
+    viewActive = true
+    void appReady.then((app) => {
+      if (!app) {
+        revealHud(true)
+        return
       }
-    }
-    talkPlayer.reset()
+      // appReady resolve 前组件可能已停用/卸载——不要把 ticker 重新拉起
+      if (!viewActive || isComponentUnmounted) return
+      app.ticker.start()
+      addCanvasToBackground()
+      if (!animation && currentConfig.value?.memorialLobbies) {
+        if (isFirstLoad) {
+          setL2D(id)
+          isFirstLoad = false
+        } else {
+          loadL2DSkipIdle(id)
+        }
+      }
+      talkPlayer.reset()
+    })
   })
 
   onDeactivated(() => {
-    if (!webglFailed.value) l2d.ticker.stop()
+    viewActive = false
+    if (!webglFailed.value) l2d?.ticker.stop()
   })
 
   onUnmounted(() => {
@@ -556,9 +574,9 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
     detachInteractions()
     pointer.removeEventListenersFromCanvas()
     window.removeEventListener('resize', handleWindowResize)
-    canvas.removeEventListener('webglcontextlost', handleContextLost)
+    canvas?.removeEventListener('webglcontextlost', handleContextLost)
     try {
-      l2d.destroy(true)
+      l2d?.destroy(true)
     } catch {
       /* 上下文已丢失时 destroy 可能再抛 */
     }
@@ -575,8 +593,13 @@ export function useSpineLifecycle(deps: SpineLifecycleDeps) {
   )
 
   return {
-    app: l2d,
-    canvas,
+    // PIXI 8 异步入驻：以 getter 暴露，消费方（Background.vue 的 getApp/getCanvas）始终读到最新值
+    get app() {
+      return l2d
+    },
+    get canvas() {
+      return canvas
+    },
     webglFailed,
     getSpine: () => animation,
     getId: () => id,

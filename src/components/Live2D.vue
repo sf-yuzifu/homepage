@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Spine, SpineTexture } from '@esotericsoftware/spine-pixi-v7'
+import { Spine, SpineTexture } from '@esotericsoftware/spine-pixi-v8'
 import * as PIXI from 'pixi.js'
 import { ref, onMounted, onUnmounted, onActivated, onDeactivated, computed } from 'vue'
 import { useConfig } from '@/composables/useConfig'
@@ -44,7 +44,8 @@ onMounted(async () => {
   const containerWidth = 2560
   const containerHeight = 1440
 
-  const pixiApp = tryCreatePixiApp({
+  // PIXI 8：应用只能异步 init 创建
+  const pixiApp = await tryCreatePixiApp({
     width: containerWidth,
     height: containerHeight,
     backgroundAlpha: 0,
@@ -53,10 +54,10 @@ onMounted(async () => {
     antialias: false,
     resolution: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 1.5)
   })
-  if (!pixiApp) return
+  if (!pixiApp || isUnmounted) return
   app = pixiApp
 
-  l2dContainer.value.appendChild(pixiApp.view as HTMLCanvasElement)
+  l2dContainer.value.appendChild(pixiApp.canvas as HTMLCanvasElement)
 
   try {
     // 从配置构建资源路径
@@ -132,7 +133,8 @@ onUnmounted(() => {
     spine = null
   }
   if (app) {
-    app.destroy(true, { children: true, texture: true, baseTexture: true })
+    // PIXI 8：baseTexture 选项更名为 textureSource
+    app.destroy(true, { children: true, texture: true, textureSource: true })
     app = null
   }
 
@@ -144,17 +146,17 @@ onUnmounted(() => {
     PIXI.Assets.unload([skeletonAlias, atlasAlias, ...pageTextureUrls]).catch(() => {
       // 卸载失败不影响清理流程
     })
-    // 清理 Spine 静态骨骼缓存（缓存键格式为 skeleton-atlas-scale，scale 默认为 1）
-    delete Spine.skeletonCache[`${skeletonAlias}-${atlasAlias}-1`]
+    // 清理 PIXI Cache 中的骨骼数据缓存（缓存键格式为 skeleton-atlas-scale，scale 默认为 1）
+    PIXI.Cache.remove(`${skeletonAlias}-${atlasAlias}-1`)
     // 清理 SpineTexture 静态缓存中已随图集释放的贴图
     const textureMap = (
       SpineTexture as unknown as {
-        textureMap: Map<PIXI.BaseTexture, SpineTexture>
+        textureMap: Map<PIXI.TextureSource, SpineTexture>
       }
     ).textureMap
-    for (const [baseTexture, spineTexture] of textureMap) {
+    for (const [textureSource, spineTexture] of textureMap) {
       if (spineTexture.texture.destroyed) {
-        textureMap.delete(baseTexture)
+        textureMap.delete(textureSource)
       }
     }
     skeletonAlias = null

@@ -1,5 +1,5 @@
 import { ref, watch, computed, onUnmounted, type Ref } from 'vue'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { Application } from 'pixi.js'
 import type { MemorialLobby } from '@/types/config'
 import { findDialogueAnchorBone } from './boneDetect'

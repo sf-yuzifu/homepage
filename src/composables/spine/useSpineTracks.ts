@@ -1,4 +1,4 @@
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { TrackEntry } from '@esotericsoftware/spine-core'
 
 // 轨道约定（对齐原游戏，各轨编号已经官方 SpineClip 资产的 Track 字段证实）：

@@ -1,5 +1,5 @@
 import type { Bone, Vector2 } from '@esotericsoftware/spine-core'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import { createSmoothDamp2, type SmoothDamp2 } from './smoothDamp'
 import { findBoneByCandidates } from './boneDetect'
 

@@ -72,7 +72,7 @@ All site content (site info, contacts, project showcase, music list, Live2D char
 | --- | --- |
 | [Vue 3](https://vuejs.org/) + [Vue Router](https://router.vuejs.org/) | Frontend framework and routing |
 | [Vite](https://vitejs.dev/) | Build tool |
-| [PIXI.js](https://github.com/pixijs/pixijs) + [spine-pixi-v7](https://www.npmjs.com/package/@esotericsoftware/spine-pixi-v7) | Memorial lobby Spine skeletal animation rendering |
+| [PIXI.js](https://github.com/pixijs/pixijs) + [spine-pixi-v8](https://www.npmjs.com/package/@esotericsoftware/spine-pixi-v8) | Memorial lobby Spine skeletal animation rendering |
 | [Arco Design](https://arco.design/) | UI component library (imported on demand) |
 | [APlayer](https://aplayer.js.org/#/) + [howler.js](https://github.com/goldfire/howler.js) | Music playback / character voice playback |
 | [js-yaml](https://github.com/nodeca/js-yaml) | YAML configuration parsing |

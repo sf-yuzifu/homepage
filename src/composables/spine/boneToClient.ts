@@ -1,4 +1,4 @@
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { Application } from 'pixi.js'
 
 /** 骨架骨骼世界坐标 → 浏览器 client 像素（与 __l2dDebug.boneClientPos 一致） */

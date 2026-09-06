@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import { useConfig } from '@/composables/useConfig'
 import { useModalOpen } from '@/composables/useModalOpen'
 import { useTalkPlayer } from '@/composables/spine/useTalkPlayer'

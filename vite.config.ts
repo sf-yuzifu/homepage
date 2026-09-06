@@ -221,7 +221,8 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     build: {
       assetsInlineLimit: 0,
       minify: 'esbuild',
-      chunkSizeWarningLimit: 700,
+      // PIXI 8 渲染引擎分包后约 730KB（gzip ~212KB），阈值随之放宽
+      chunkSizeWarningLimit: 800,
       rollupOptions: {
         output: {
           manualChunks(id: string) {

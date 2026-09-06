@@ -72,7 +72,7 @@
 | --- | --- |
 | [Vue 3](https://cn.vuejs.org/) + [Vue Router](https://router.vuejs.org/zh/) | 前端框架与路由 |
 | [Vite](https://vitejs.cn/) | 构建工具 |
-| [PIXI.js](https://github.com/pixijs/pixijs) + [spine-pixi-v7](https://www.npmjs.com/package/@esotericsoftware/spine-pixi-v7) | 回忆大厅 Spine 骨骼动画渲染 |
+| [PIXI.js](https://github.com/pixijs/pixijs) + [spine-pixi-v8](https://www.npmjs.com/package/@esotericsoftware/spine-pixi-v8) | 回忆大厅 Spine 骨骼动画渲染 |
 | [Arco Design](https://arco.design/) | UI 组件库（按需引入） |
 | [APlayer](https://aplayer.js.org/#/) + [howler.js](https://github.com/goldfire/howler.js) | 音乐播放 / 角色语音播放 |
 | [js-yaml](https://github.com/nodeca/js-yaml) | YAML 配置解析 |

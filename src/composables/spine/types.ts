@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { Spine } from '@esotericsoftware/spine-pixi-v7'
+import type { Spine } from '@esotericsoftware/spine-pixi-v8'
 import type { Bone } from '@esotericsoftware/spine-core'
 import type { MemorialLobby } from '@/types/config'
 
