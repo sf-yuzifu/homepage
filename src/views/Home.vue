@@ -10,7 +10,7 @@ import { useResponsive } from '@/composables/useResponsive'
 import { useConfig } from '@/composables/useConfig'
 import ICPBanner from '@/components/ICPBanner.vue'
 
-// 退出 L2D 全屏观赏后再加载（media chunk：APlayer + axios + howler）
+// 退出 L2D 全屏观赏后再加载（media chunk：APlayer + howler）
 const MusicBanner = defineAsyncComponent(() => import('@/components/MusicBanner.vue'))
 
 // 状态管理

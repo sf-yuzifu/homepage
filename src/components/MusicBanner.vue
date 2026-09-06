@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
-import axios from 'axios'
 import 'aplayer/dist/APlayer.min.css'
 import APlayer from 'aplayer'
 import type { APlayerAudio } from 'aplayer'
@@ -118,16 +117,20 @@ const readString = (value: unknown): string | undefined => {
 // 获取歌曲数据
 const fetchSongData = async (songId: number): Promise<APlayerAudio | null> => {
   try {
-    const response = await axios.get<unknown>(
+    const response = await fetch(
       `https://api.injahow.cn/meting/?server=netease&type=song&id=${songId}`,
-      { timeout: 8000 }
+      { signal: AbortSignal.timeout(8000) }
     )
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`)
+    }
+    const json: unknown = await response.json()
 
     // 检查响应数据结构
-    console.log('API响应:', response.data)
+    console.log('API响应:', json)
 
     // Meting API 返回数组，单曲类型取第一项
-    const data = Array.isArray(response.data) ? response.data[0] : response.data
+    const data = Array.isArray(json) ? json[0] : json
 
     // 验证数据结构
     if (!isRecord(data)) {

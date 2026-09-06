@@ -5,7 +5,7 @@ import fs from 'fs'
 
 import { defineConfig, type PluginOption, type UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import viteCompression from 'vite-plugin-compression'
+import { compression } from 'vite-plugin-compression2'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { VitePWA } from 'vite-plugin-pwa'
 import type { ManifestOptions } from 'vite-plugin-pwa'
@@ -191,7 +191,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       },
       manifest: pwaManifest
     }),
-    viteCompression({
+    compression({
       threshold: 10240 // the unit is Bytes
     }),
     // 须在 viteCompression 之后注册，closeBundle 时先转 WebP 再 gzip 新产物
@@ -258,7 +258,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
             )
               return 'arco'
             // 音视频播放
-            if (['aplayer', 'axios', 'howler'].includes(pkg)) return 'media'
+            if (['aplayer', 'howler'].includes(pkg)) return 'media'
             // BA 点击特效（桌面按需动态 import，独立 chunk）
             if (pkg === 'ba-click-fx') return 'click-fx'
             // 其余第三方依赖合并为一个 vendor chunk，避免按包拆出过碎的文件
