@@ -258,8 +258,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
               ].includes(pkg)
             )
               return 'arco'
-            // 音视频播放
-            if (['aplayer', 'howler'].includes(pkg)) return 'media'
             // BA 点击特效（桌面按需动态 import，独立 chunk）
             if (pkg === 'ba-click-fx') return 'click-fx'
             // 其余第三方依赖合并为一个 vendor chunk，避免按包拆出过碎的文件

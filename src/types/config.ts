@@ -179,6 +179,10 @@ export interface TranslateConfig {
   walletPyroxene?: string
   musicUnknownSong?: string
   musicUnknownArtist?: string
+  musicPlay?: string
+  musicPause?: string
+  musicNext?: string
+  musicProgress?: string
   settings?: string
   settingsAudio?: string
   settingsPresentation?: string

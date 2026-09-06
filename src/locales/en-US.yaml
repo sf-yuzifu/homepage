@@ -117,6 +117,10 @@ translate:
   walletPyroxene: 'Daily sign-in streak: {days}'
   musicUnknownSong: Unknown song
   musicUnknownArtist: Unknown artist
+  musicPlay: Play
+  musicPause: Pause
+  musicNext: Next track
+  musicProgress: Playback progress
   settings: Options
   settingsAudio: Volume
   settingsPresentation: Presentation

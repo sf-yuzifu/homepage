@@ -18,7 +18,7 @@ interface SettingsPersistedState {
 const STORAGE_KEY = 'fa-settings'
 /** 与改造前 useTalkPlayer 里硬编码的语音音量保持一致 */
 const DEFAULT_VOICE_VOLUME = 0.3
-/** APlayer 自身的默认音量 */
+/** BGM 默认音量 */
 const DEFAULT_BGM_VOLUME = 0.7
 
 // 模块级单例：Toolbox（设置面板）与各播放器共享同一份偏好

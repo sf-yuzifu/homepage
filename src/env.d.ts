@@ -43,45 +43,6 @@ declare module 'virtual:pwa-register' {
   export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
 }
 
-declare module 'aplayer' {
-  export interface APlayerAudio {
-    name: string
-    artist: string
-    url: string
-    cover?: string
-    lrc?: string
-  }
-
-  export interface APlayerOptions {
-    container: HTMLElement
-    autoplay?: boolean
-    mini?: boolean
-    order?: 'list' | 'random'
-    lrcType?: number
-    listFolded?: boolean
-    loop?: 'all' | 'one' | 'none'
-    audio?: APlayerAudio[]
-  }
-
-  export default class APlayer {
-    constructor(options: APlayerOptions)
-    destroy(): void
-    play(): void
-    pause(): void
-    /** nostorage 为 true 时不写 APlayer 自己的 localStorage（音量由本站设置面板接管） */
-    volume(percentage?: number, nostorage?: boolean): void
-    on(event: string, callback: (...args: unknown[]) => void): void
-    setMode(mode: 'mini' | 'normal'): void
-    lrc: { hide(): void; show(): void }
-    list: {
-      add(audios: APlayerAudio | APlayerAudio[]): void
-      clear(): void
-      switch(index: number): void
-    }
-    audio: HTMLAudioElement
-  }
-}
-
 declare module 'ba-click-fx' {
   export class BAClickFX {
     constructor(options?: Record<string, unknown>)

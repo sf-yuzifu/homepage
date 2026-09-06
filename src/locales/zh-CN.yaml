@@ -115,6 +115,10 @@ translate:
   walletPyroxene: 已连续签到 {days} 天
   musicUnknownSong: 未知歌曲
   musicUnknownArtist: 未知艺术家
+  musicPlay: 播放
+  musicPause: 暂停
+  musicNext: 下一首
+  musicProgress: 播放进度
   settings: 设置
   settingsAudio: 音量
   settingsPresentation: 演出

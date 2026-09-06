@@ -118,6 +118,10 @@ translate:
   walletPyroxene: '{days}日連続ログイン'
   musicUnknownSong: 不明な曲
   musicUnknownArtist: 不明なアーティスト
+  musicPlay: 再生
+  musicPause: 一時停止
+  musicNext: 次の曲
+  musicProgress: 再生位置
   settings: 設定
   settingsAudio: 音量
   settingsPresentation: 演出
