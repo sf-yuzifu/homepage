@@ -146,6 +146,8 @@ const onSkipLayerClick = () => {
   skipStartIdle()
 }
 
+const dialogueLayerEl = ref<HTMLElement | null>(null)
+
 const {
   side: dialogueSide,
   layerStyle: dialogueLayerStyle,
@@ -155,7 +157,8 @@ const {
   getSpine: spine.getSpine,
   getCanvas: () => spine.canvas,
   getApp: () => spine.app,
-  getLobby: () => currentConfig.value?.memorialLobbies?.[spineApi.getId()]
+  getLobby: () => currentConfig.value?.memorialLobbies?.[spineApi.getId()],
+  getLayerEl: () => dialogueLayerEl.value
 })
 
 /** 弹窗打开时不显示台词（避免挡在 Modal 上方） */
@@ -292,7 +295,12 @@ if (import.meta.env.DEV) {
   >
     <span>{{ currentConfig?.translate?.skip || 'Skip' }}</span>
   </button>
-  <div v-if="dialogueVisible" class="dialogue-layer" :style="dialogueLayerStyle">
+  <div
+    v-if="dialogueVisible"
+    ref="dialogueLayerEl"
+    class="dialogue-layer"
+    :style="dialogueLayerStyle"
+  >
     <div
       class="dialogue"
       :class="`dialogue--${dialogueSide}`"
@@ -314,10 +322,17 @@ if (import.meta.env.DEV) {
 }
 
 .dialogue {
+  /* 气泡与锚点一侧的间距（margin 与压缩时 max-width 的扣除量共用） */
+  --bubble-side-gap: clamp(8px, 0.5vw, 100vw);
   position: relative;
   padding: clamp(30px, 1.875vw, 100vw) clamp(20px, 1.25vw, 100vw);
   width: max-content;
-  max-width: clamp(280px, 17.5vw, 100vw);
+  /* --dialogue-max-w 由 useDialogueAnchor 视口收边后内联到气泡层：
+     贴边时气泡压缩换行；未收边时回退 100vw，等同只看原 clamp 上限 */
+  max-width: min(
+    clamp(280px, 17.5vw, 100vw),
+    calc(var(--dialogue-max-w, 100vw) - var(--bubble-side-gap))
+  );
   font-size: clamp(24px, 1.5vw, 100vw);
   background-color: #f0f0f0dd;
   border-radius: clamp(10px, 0.625vw, 100vw);
@@ -326,11 +341,11 @@ if (import.meta.env.DEV) {
 
 /* 三角箭头（只画向外的一半） */
 .dialogue--right {
-  margin-left: clamp(8px, 0.5vw, 100vw);
+  margin-left: var(--bubble-side-gap);
 }
 
 .dialogue--left {
-  margin-right: clamp(8px, 0.5vw, 100vw);
+  margin-right: var(--bubble-side-gap);
 }
 
 .dialogue--right::before,
